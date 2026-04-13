@@ -11,9 +11,8 @@ services:
     networks:
         - 3-tier  
     depends_on:
-      - db:
-          condition: service_healthy
-      - redis
+      db:
+        condition: service_healthy  
     env_file:
       - .env
     
