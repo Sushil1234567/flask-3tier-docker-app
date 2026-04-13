@@ -8,6 +8,8 @@ services:
     build: ./app
     ports:
       - "5000:5000"
+    networks:
+        - 3-tier  
     depends_on:
       - db
       - redis
@@ -20,6 +22,8 @@ services:
     restart: always
     ports:
       - "3306:3306"
+    networks:
+        - 3-tier  
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -31,11 +35,17 @@ services:
   redis:
     image: redis:7
     restart: always
+    networks:
+        - 3-tier
     ports:
       - "6379:6379"
 
 volumes:
   db_data:
+  
+networks:
+  3-tier:
+    driver: bridge
 
 
 
